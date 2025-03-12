@@ -130,9 +130,9 @@ services:
       # do not use this docker compose in production
       - ./docker/superset-websocket/config.json:/home/superset-websocket/config.json
     environment:
-      - PORT=8080
+      - PORT=8091
       - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_PORT=8087
       - REDIS_SSL=false
 
   superset-init:
@@ -156,6 +156,7 @@ services:
       CYPRESS_CONFIG: "${CYPRESS_CONFIG:-}"
       SUPERSET_LOAD_EXAMPLES: "${SUPERSET_LOAD_EXAMPLES:-yes}"
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
+      SUPERSET_PORT: 8089
     healthcheck:
       disable: true
 
@@ -176,7 +177,8 @@ services:
       NPM_RUN_PRUNE: false
       SCARF_ANALYTICS: "${SCARF_ANALYTICS:-}"
       # configuring the dev-server to use the host.docker.internal to connect to the backend
-      superset: "http://superset:8088"
+      superset: "http://superset:8089"
+      SUPERSET_PORT: 8089
     ports:
       - "127.0.0.1:8092:9000"  # exposing the dynamic webpack dev server
     container_name: superset_node
@@ -202,6 +204,7 @@ services:
       CELERYD_CONCURRENCY: 2
       CYPRESS_CONFIG: "${CYPRESS_CONFIG:-}"
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
+      SUPERSET_PORT: 8089
     restart: unless-stopped
     depends_on:
       superset-init:
