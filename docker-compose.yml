@@ -50,8 +50,6 @@ services:
       - "8086:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
   redis:
     image: redis:7
     container_name: superset_cache
@@ -128,7 +126,6 @@ services:
 
       # Mounting a config file that contains a dummy secret required to boot up.
       # do not use this docker compose in production
-      - ./docker/superset-websocket/config.json:/home/superset-websocket/config.json
     environment:
       - PORT=8091
       - REDIS_HOST=redis
