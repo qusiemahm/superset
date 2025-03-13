@@ -94,7 +94,7 @@ services:
       - /home/superset-websocket/node_modules
       - /home/superset-websocket/dist
 
-      - ./docker/superset-websocket/config.json:/home/superset-websocket/config.json
+      - ./docker/superset-websocket:/home/superset-websocket
     environment:
       - PORT=8091
       - REDIS_HOST=redis
