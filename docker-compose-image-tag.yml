@@ -60,7 +60,7 @@ services:
     user: "root"
     restart: unless-stopped
     ports:
-      - 8088:8088
+      - 8089:8088
     depends_on:
       superset-init:
         condition: service_completed_successfully
@@ -89,6 +89,8 @@ services:
     environment:
       SUPERSET_LOAD_EXAMPLES: "${SUPERSET_LOAD_EXAMPLES:-yes}"
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
+      SECRET_KEY: "${SECRET_KEY:-uTKIefbszq/WYVaBc3fcQYbmNOe5daNNLEI/8qO6p4iRSt9sZS1usrPu}"
+
 
   superset-worker:
     image: *superset-image
