@@ -44,6 +44,8 @@ services:
     image: postgres:16
     container_name: superset_db
     restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: superset
     volumes:
       - db_home:/var/lib/postgresql/data
       - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
@@ -89,7 +91,7 @@ services:
     environment:
       SUPERSET_LOAD_EXAMPLES: "${SUPERSET_LOAD_EXAMPLES:-yes}"
       SUPERSET_LOG_LEVEL: "${SUPERSET_LOG_LEVEL:-info}"
-      SECRET_KEY: "${SECRET_KEY:-uTKIefbszq/WYVaBc3fcQYbmNOe5daNNLEI/8qO6p4iRSt9sZS1usrPu}"
+      SUPERSET_SECRET_KEY: "${SECRET_KEY:-uTKIefbszq/WYVaBc3fcQYbmNOe5daNNLEI/8qO6p4iRSt9sZS1usrPu}"
 
 
   superset-worker:
